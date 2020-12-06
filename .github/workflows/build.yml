@@ -16,6 +16,10 @@ jobs:
 
       - name: Cache Docker layers
         uses: satackey/action-docker-layer-caching@v0.0.8
+        with:
+          key: docker-layer-caching-Build and Release-{hash}
+          restore-keys: |
+            docker-layer-caching-Build and Release-24cf380ae8853e6c316673f3f0054da2829b45e4f9b6c104290ebcdca636162f
 
       - name: Build Docker builder image
         run: docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) -f .github/docker/linux/Dockerfile -t builder .
